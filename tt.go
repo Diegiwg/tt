@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
@@ -69,6 +70,13 @@ func (record *Record) TotalTime() string {
 	var total time.Duration
 
 	for _, item := range record.Items {
+
+		if item.End == (time.Time{}) {
+			continue
+		}
+
+		fmt.Printf("Item: %02d:%02d - %02d:%02d\n", item.Start.Hour(), item.Start.Minute(), item.End.Hour(), item.End.Minute())
+
 		total += item.End.Sub(item.Start)
 	}
 
@@ -147,6 +155,7 @@ func ReadOrCreateRecord(ctx *cli.Context) Record {
 func cmdStart(ctx *cli.Context) error {
 	r := NewRecord()
 	r.Start()
+
 	SaveRecordToFile(ctx, &r)
 
 	return nil
