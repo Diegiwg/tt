@@ -84,7 +84,8 @@ func (record *Record) TotalTime() string {
 }
 
 func SaveRecordToFile(ctx *cli.Context, record *Record) {
-	dbPath := filepath.Join(filepath.Dir(ctx.App.Program), "tt.db")
+	USER_HOME, _ := os.UserHomeDir()
+	DB_PATH := filepath.Join(USER_HOME, "tt.db")
 
 	fileContent := ""
 
@@ -100,14 +101,14 @@ func SaveRecordToFile(ctx *cli.Context, record *Record) {
 		}
 	}
 
-	os.WriteFile(dbPath, []byte(fileContent), 0644)
+	os.WriteFile(DB_PATH, []byte(fileContent), 0644)
 }
 
 func ReadOrCreateRecord(ctx *cli.Context) Record {
+	USER_HOME, _ := os.UserHomeDir()
+	DB_PATH := filepath.Join(USER_HOME, "tt.db")
 
-	dbPath := filepath.Join(filepath.Dir(ctx.App.Program), "tt.db")
-
-	_, err := os.Stat(dbPath)
+	_, err := os.Stat(DB_PATH)
 	if err != nil {
 		println("record not found, creating new one")
 		r := NewRecord()
@@ -115,7 +116,7 @@ func ReadOrCreateRecord(ctx *cli.Context) Record {
 		return r
 	}
 
-	fileContent, err := os.ReadFile(dbPath)
+	fileContent, err := os.ReadFile(DB_PATH)
 	if err != nil {
 		panic(err)
 	}
@@ -193,6 +194,19 @@ func cmdStop(ctx *cli.Context) error {
 	return nil
 }
 
+func cmdShow(ctx *cli.Context) error {
+	r := ReadOrCreateRecord(ctx)
+
+	if len(r.Items) == 0 {
+		return errors.New("no items found in record")
+	}
+
+	time := r.TotalTime()
+	println("Total time:", time)
+
+	return nil
+}
+
 func main() {
 	app := cli.NewApp()
 
@@ -226,6 +240,14 @@ func main() {
 		Help:  "Stop a record of time",
 		Usage: "",
 		Exec:  cmdStop,
+	})
+
+	app.AddCommand(&cli.Command{
+		Name:  "show",
+		Desc:  "Show a record of time",
+		Help:  "Show a record of time",
+		Usage: "",
+		Exec:  cmdShow,
 	})
 
 	err := app.Run()
