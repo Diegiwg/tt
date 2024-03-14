@@ -1,4 +1,4 @@
-# Readme: Time Tracker CLI
+# Time Tracker CLI
 
 This is a simple CLI program for tracking time spent on activities. It offers basic functionalities to start, pause, resume, stop, and show the recorded time.
 
