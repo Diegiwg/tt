@@ -38,34 +38,17 @@ Make sure the `$GOPATH/bin` directory is added to your `$PATH` so you can run th
 
 ### Example Usage
 
-To start a new time record:
-
 ```bash
 tt start
-```
-
-To add a pause:
-
-```bash
+# Some time has passed
 tt pause
-```
-
-To resume after a pause:
-
-```bash
+# Took a break
 tt resume
-```
-
-To stop and clear the time record:
-
-```bash
-tt stop
-```
-
-To show the time passed:
-
-```bash
+# Worked some more
 tt show
+# See that in 10 minutes it's time to stop working
+tt stop
+# Ends today's work, and see the result on the screen of how many hours have passed
 ```
 
 ## Contributing
