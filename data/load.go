@@ -1,6 +1,7 @@
 package data
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
@@ -49,9 +50,15 @@ func ReadOrCreateRecord(ctx *cli.Context) model.Record {
 	}
 
 	// Check if exist a current item
-	for i, item := range record.Items {
+	item_count := len(record.Items)
+	for index, item := range record.Items {
 		if item.End == (time.Time{}) {
-			record.CurrentItem = i
+			if index != item_count-1 {
+				fmt.Println("End not found for Item", index+1)
+				continue
+			}
+
+			record.CurrentItem = index
 			break
 		}
 	}
