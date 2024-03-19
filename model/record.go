@@ -55,10 +55,15 @@ func (record *Record) Stop() error {
 func (record *Record) TotalTime() string {
 	var total time.Duration
 
-	for _, item := range record.Items {
+	item_count := len(record.Items)
+	for index, item := range record.Items {
 
 		if item.End == (time.Time{}) {
-			continue
+			if index != item_count-1 {
+				continue
+			}
+
+			item.End = time.Now()
 		}
 
 		fmt.Printf("Item: %02d:%02d - %02d:%02d\n", item.Start.Hour(), item.Start.Minute(), item.End.Hour(), item.End.Minute())
