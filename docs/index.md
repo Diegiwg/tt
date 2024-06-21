@@ -1,6 +1,6 @@
 # Time Tracker CLI
 
-[![Brazil Flag](/docs/public/brazil.png) Documentation in Portuguese](https://diegiwg.github.io/tt/pt)
+[![Brazil Flag](https://diegiwg.github.io/tt/public/brazil.png) Documentation in Portuguese](https://diegiwg.github.io/tt/pt)
 
 ## Project Overview 🚀
 
