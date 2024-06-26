@@ -17,9 +17,19 @@ jobs:
         with:
           go-version: 1.22
 
-      - name: Build
+      - name: Build Linux
         run: go build -o bin/tt
-        id: build
+        id: build-linux
+
+      - name: Build Windows
+        run: GOOS=windows GOARCH=amd64 go build -o bin/tt.exe
+        id: build-windows
+
+      - name: Prepare Release
+        run: |
+          mkdir -p dist
+          zip -j bin/tt dist/tt-linux
+          zip -j bin/tt.exe dist/tt-windows
 
       - name: Release
         uses: softprops/action-gh-release@v1
@@ -29,6 +39,7 @@ jobs:
           prerelease: false
           tag_name: ${{ github.ref_name }}
           files: |
-            bin/tt
+            dist/tt-linux
+            dist/tt-windows
         env:
           GITHUB_TOKEN: ${{ secrets.MY_PAT }}
