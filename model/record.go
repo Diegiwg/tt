@@ -7,19 +7,23 @@ import (
 )
 
 type RecordItem struct {
-	Start time.Time
-	End   time.Time
+	Start time.Time `json:"start"`
+	End   time.Time `json:"end"`
+}
+
+type Record struct {
+	Items       []RecordItem `json:"items"`
+	CurrentItem int          `json:"current_item"`
+}
+
+type RecordTable struct {
+	Records []Record `json:"records"`
 }
 
 func NewRecordItem() RecordItem {
 	return RecordItem{
 		Start: time.Now(),
 	}
-}
-
-type Record struct {
-	Items       []RecordItem
-	CurrentItem int
 }
 
 func NewRecord() Record {
