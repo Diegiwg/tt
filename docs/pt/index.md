@@ -8,7 +8,7 @@ Este é um programa de linha de comando simples para rastrear o tempo gasto em a
 
 ## Download
 
-Para baixar este programa, acesse o repositório [GitHub](https://github.com/Diegiwg/tt)
+Para baixar este programa, acesse a página de [lançamentos](https://github.com/Diegiwg/tt/releases)
 
 ## Instalação
 

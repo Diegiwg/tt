@@ -8,7 +8,7 @@ This is a simple CLI program for tracking time spent on activities. It offers ba
 
 ## Download
 
-To download this program, visit the [GitHub repository](https://github.com/Diegiwg/tt)
+To download this program, visit the [releases](https://github.com/Diegiwg/tt/releases) page
 
 ## Installation
 
