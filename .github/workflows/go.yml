@@ -3,7 +3,7 @@ name: Build and Release
 on:
   push:
     tags:
-      - 'v*.*.*'
+      - "v*.*.*"
 
 jobs:
   build:
@@ -17,11 +17,11 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v3
         with:
-          go-version: '1.23'
+          go-version: "1.22"
 
       - name: Build
         run: |
-          go build -o bin/tt main.go  # Adjust this command according to your project's build process
+          go build -o bin/tt
           mkdir -p dist
           cp bin/tt dist/
 
