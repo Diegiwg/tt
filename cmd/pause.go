@@ -8,8 +8,12 @@ import (
 func Pause(ctx *cli.Context) error {
 	table := data.ReadOrCreateRecord(ctx)
 
-	r := table.GetLast()
-	r.Stop()
+	record := table.GetLast()
+
+	err := record.Stop()
+	if err != nil {
+		return err
+	}
 
 	data.SaveRecordToFile(ctx, &table)
 

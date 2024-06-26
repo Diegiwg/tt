@@ -8,7 +8,11 @@ import (
 
 func Start(ctx *cli.Context) error {
 	r := model.NewRecord()
-	r.Start()
+
+	err := r.Start()
+	if err != nil {
+		return err
+	}
 
 	table := data.ReadOrCreateRecord(ctx)
 	table.Add(r)

@@ -8,8 +8,11 @@ import (
 func Resume(ctx *cli.Context) error {
 	table := data.ReadOrCreateRecord(ctx)
 
-	r := table.GetLast()
-	r.Start()
+	record := table.GetLast()
+	err := record.Start()
+	if err != nil {
+		return err
+	}
 
 	data.SaveRecordToFile(ctx, &table)
 

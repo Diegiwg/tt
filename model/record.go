@@ -43,8 +43,8 @@ func (table *RecordTable) Add(record Record) {
 	table.Records = append(table.Records, record)
 }
 
-func (table *RecordTable) GetLast() Record {
-	return table.Records[len(table.Records)-1]
+func (table *RecordTable) GetLast() *Record {
+	return &table.Records[len(table.Records)-1]
 }
 
 func (record *Record) Start() error {
