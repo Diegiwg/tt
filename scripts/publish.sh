@@ -23,8 +23,12 @@ git tag "$VERSION"
 # Push the new tag version
 git push origin "$VERSION"
 
+# Wait for the new version to be published
+echo "Waiting for pkg.go.dev to publish the new version..."
+sleep 10
+
 # Publish the new version
-GOPROXY=proxy.golang.org go list -m github.com/Diegiwg/tt@"$VERSION"
+GOPROXY=proxy.golang.org go list -m github.com/Diegiwg/tt@"$VERSION" &
 
 # Test if the version was published
 echo "Getting the version from https://pkg.go.dev/github.com/Diegiwg/tt@$VERSION..."
