@@ -6,61 +6,39 @@ on:
       - "v*.*.*"
 
 jobs:
-  build:
-    name: Build
+  build-and-release:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
 
       - name: Set up Go
-        uses: actions/setup-go@v3
+        uses: actions/setup-go@v2
         with:
-          go-version: "1.22"
+          go-version: 1.22
 
-      - name: Build
+      - name: Build and test
         run: |
-          go build -o bin/tt
-          mkdir -p dist
-          cp bin/tt dist/
+          go build -v
+          go test -v
 
-      - name: Archive binaries
-        run: |
-          zip -j dist/tt_${{ matrix.os }}.zip dist/tt
-
-      - name: Upload Release Asset
-        uses: actions/upload-artifact@v3
-        with:
-          name: tt_${{ matrix.os }}.zip
-          path: dist/tt_${{ matrix.os }}.zip
-
-  release:
-    name: Create Release
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Download artifacts
-        uses: actions/download-artifact@v4
-
-      - name: Grab and store version
-        run: |
-          tag_name=$(echo ${{ github.ref }} | grep -oE "[^/]+$")
-          echo "VERSION=$tag_name" >> $GITHUB_ENV
-
-      - name: Create Release
-        id: create_release
-        uses: softprops/action-gh-release@v2
+      - name: Create release
+        uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           tag_name: ${{ github.ref }}
-          name: Prism Launcher ${{ env.VERSION }}
-          draft: true
+          release_name: Release ${{ github.ref }}
+          draft: false
           prerelease: false
-          files: dist/tt_*.zip
+
+      - name: Upload binary
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./tt
+          asset_name: tt-${{ github.ref }}.tar.gz
+          asset_content_type: application/gzip
