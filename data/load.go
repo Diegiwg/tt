@@ -16,10 +16,11 @@ func ReadOrCreateRecord(ctx *cli.Context) model.RecordTable {
 
 	_, err := os.Stat(dbPath)
 	if err != nil {
-		println("record not found, creating new one")
-		r := model.NewRecordTable()
-		SaveRecordToFile(ctx, &r)
-		return r
+		table := model.NewRecordTable()
+		table.Add(model.NewRecord())
+
+		SaveRecordToFile(ctx, &table)
+		return table
 	}
 
 	fileContent, err := os.ReadFile(dbPath)
