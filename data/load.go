@@ -29,7 +29,12 @@ func ReadOrCreateRecord(ctx *cli.Context) model.RecordTable {
 
 	err = json.Unmarshal(fileContent, &table)
 	if err != nil {
-		panic(err)
+		println("Database file is corrupted. Creating new one.")
+
+		table = model.NewRecordTable()
+		table.Add(model.NewRecord())
+
+		SaveRecordToFile(ctx, &table)
 	}
 
 	return table
