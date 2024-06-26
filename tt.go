@@ -48,6 +48,14 @@ func main() {
 		Exec:  cmd.Show,
 	})
 
+	app.AddCommand(&cli.Command{
+		Name:  "list",
+		Desc:  "Lists all time records",
+		Help:  "When you want to see all time records, use this command.",
+		Usage: "[--limit: int]",
+		Exec:  cmd.List,
+	})
+
 	err := app.Run()
 	if err != nil {
 		println(err.Error())

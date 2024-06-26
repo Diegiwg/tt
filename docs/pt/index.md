@@ -44,6 +44,10 @@ Certifique-se de que o diretório `$GOPATH/bin` está adicionado ao seu `$PATH` 
    - **Descrição**: Quando você quiser ver quanto tempo passou sem finalizar o registro, use este comando.
    - **Uso**: `tt show`
 
+6. **list**: Lista todos os registros de tempo.
+   - **Descrição**: Quando você quiser ver todos os registros de tempo, use este comando.
+   - **Uso**: `tt list [--limit: int]`
+
 ### Exemplo de Uso
 
 ```bash
@@ -57,6 +61,8 @@ tt show
 # Verifique que em 10 minutos é hora de parar de trabalhar
 tt stop
 # Termina o trabalho de hoje e vê o resultado na tela de quantas horas se passaram
+tt show
+# Veja o registro anterior na lista de registros cadastrados
 ```
 
 ## Contribuindo

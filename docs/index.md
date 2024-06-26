@@ -44,6 +44,10 @@ Make sure the `$GOPATH/bin` directory is added to your `$PATH` so you can run th
    - **Description**: When you want to see how much time has passed without finishing the record, use this command.
    - **Usage**: `tt show`
 
+6. **list**: Lists all time records.
+   - **Description**: When you want to see all time records, use this command.
+   - **Usage**: `tt list [--limit: int]`
+
 ### Example Usage
 
 ```bash
@@ -57,6 +61,8 @@ tt show
 # See that in 10 minutes it's time to stop working
 tt stop
 # Ends today's work, and see the result on the screen of how many hours have passed
+tt list
+# See the previous record in the list of registered records
 ```
 
 ## Contributing
