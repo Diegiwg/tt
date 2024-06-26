@@ -39,7 +39,7 @@ jobs:
           prerelease: false
           tag_name: ${{ github.ref_name }}
           files: |
-            dist/tt-linux
-            dist/tt-windows
+            dist/tt-linux.zip
+            dist/tt-windows.zip
         env:
           GITHUB_TOKEN: ${{ secrets.MY_PAT }}
