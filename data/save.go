@@ -3,16 +3,13 @@ package data
 import (
 	"encoding/json"
 	"os"
-	"path/filepath"
 
 	"github.com/Diegiwg/cli"
 	"github.com/Diegiwg/tt/model"
 )
 
 func SaveRecordToFile(ctx *cli.Context, table *model.RecordTable) {
-	USER_HOME, _ := os.UserHomeDir()
-
-	dbPath := filepath.Join(USER_HOME, "tt.db")
+	dbPath := Path()
 
 	if len(table.Records) > DATA_BASE_RECORDS_LIMIT {
 		table.Records = table.Records[len(table.Records)-DATA_BASE_RECORDS_LIMIT:]

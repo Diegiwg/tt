@@ -3,16 +3,13 @@ package data
 import (
 	"encoding/json"
 	"os"
-	"path/filepath"
 
 	"github.com/Diegiwg/cli"
 	"github.com/Diegiwg/tt/model"
 )
 
 func ReadOrCreateRecord(ctx *cli.Context) model.RecordTable {
-	USER_HOME, _ := os.UserHomeDir()
-
-	dbPath := filepath.Join(USER_HOME, "tt.db")
+	dbPath := Path()
 
 	_, err := os.Stat(dbPath)
 	if err != nil {
