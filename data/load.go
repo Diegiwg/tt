@@ -9,7 +9,7 @@ import (
 	"github.com/Diegiwg/tt/model"
 )
 
-func ReadOrCreateRecord(ctx *cli.Context) model.Record {
+func ReadOrCreateRecord(ctx *cli.Context) model.RecordTable {
 	USER_HOME, _ := os.UserHomeDir()
 
 	dbPath := filepath.Join(USER_HOME, "tt.db")
@@ -17,7 +17,7 @@ func ReadOrCreateRecord(ctx *cli.Context) model.Record {
 	_, err := os.Stat(dbPath)
 	if err != nil {
 		println("record not found, creating new one")
-		r := model.NewRecord()
+		r := model.NewRecordTable()
 		SaveRecordToFile(ctx, &r)
 		return r
 	}
@@ -27,12 +27,12 @@ func ReadOrCreateRecord(ctx *cli.Context) model.Record {
 		panic(err)
 	}
 
-	var record model.Record
+	var table model.RecordTable
 
-	err = json.Unmarshal(fileContent, &record)
+	err = json.Unmarshal(fileContent, &table)
 	if err != nil {
 		panic(err)
 	}
 
-	return record
+	return table
 }

@@ -10,7 +10,9 @@ import (
 )
 
 func Show(ctx *cli.Context) error {
-	r := data.ReadOrCreateRecord(ctx)
+	table := data.ReadOrCreateRecord(ctx)
+
+	r := table.GetLast()
 
 	if len(r.Items) == 0 {
 		return errors.New("no items found in record")
@@ -18,14 +20,14 @@ func Show(ctx *cli.Context) error {
 
 	var acc time.Duration
 
-	item_count := len(r.Items)
+	count := len(r.Items)
 	for index, item := range r.Items {
 		start := item.Start
 		end := item.End
 
 		if end == (time.Time{}) {
 
-			if index != item_count-1 {
+			if index != count-1 {
 				continue
 			}
 

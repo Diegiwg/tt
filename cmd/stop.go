@@ -5,11 +5,12 @@ import (
 
 	"github.com/Diegiwg/cli"
 	"github.com/Diegiwg/tt/data"
-	"github.com/Diegiwg/tt/model"
 )
 
 func Stop(ctx *cli.Context) error {
-	r := data.ReadOrCreateRecord(ctx)
+	table := data.ReadOrCreateRecord(ctx)
+
+	r := table.GetLast()
 
 	if r.CurrentItem != -1 && r.Stop() != nil {
 		return errors.New("no current item to stop")
@@ -18,8 +19,7 @@ func Stop(ctx *cli.Context) error {
 	time := r.TotalTime()
 	println("Total time:", time)
 
-	r = model.NewRecord()
-	data.SaveRecordToFile(ctx, &r)
+	data.SaveRecordToFile(ctx, &table)
 
 	return nil
 }

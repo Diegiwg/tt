@@ -6,9 +6,12 @@ import (
 )
 
 func Resume(ctx *cli.Context) error {
-	r := data.ReadOrCreateRecord(ctx)
+	table := data.ReadOrCreateRecord(ctx)
+
+	r := table.GetLast()
 	r.Start()
-	data.SaveRecordToFile(ctx, &r)
+
+	data.SaveRecordToFile(ctx, &table)
 
 	return nil
 }

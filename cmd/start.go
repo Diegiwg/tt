@@ -10,7 +10,10 @@ func Start(ctx *cli.Context) error {
 	r := model.NewRecord()
 	r.Start()
 
-	data.SaveRecordToFile(ctx, &r)
+	table := data.ReadOrCreateRecord(ctx)
+	table.Add(r)
+
+	data.SaveRecordToFile(ctx, &table)
 
 	return nil
 }

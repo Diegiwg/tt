@@ -33,6 +33,20 @@ func NewRecord() Record {
 	}
 }
 
+func NewRecordTable() RecordTable {
+	return RecordTable{
+		Records: []Record{},
+	}
+}
+
+func (table *RecordTable) Add(record Record) {
+	table.Records = append(table.Records, record)
+}
+
+func (table *RecordTable) GetLast() Record {
+	return table.Records[len(table.Records)-1]
+}
+
 func (record *Record) Start() error {
 	if record.CurrentItem != -1 {
 		return errors.New("already have a current item")
@@ -59,11 +73,11 @@ func (record *Record) Stop() error {
 func (record *Record) TotalTime() string {
 	var total time.Duration
 
-	item_count := len(record.Items)
+	count := len(record.Items)
 	for index, item := range record.Items {
 
 		if item.End == (time.Time{}) {
-			if index != item_count-1 {
+			if index != count-1 {
 				continue
 			}
 

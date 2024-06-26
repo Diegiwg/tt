@@ -9,12 +9,12 @@ import (
 	"github.com/Diegiwg/tt/model"
 )
 
-func SaveRecordToFile(ctx *cli.Context, record *model.Record) {
+func SaveRecordToFile(ctx *cli.Context, table *model.RecordTable) {
 	USER_HOME, _ := os.UserHomeDir()
 
 	dbPath := filepath.Join(USER_HOME, "tt.db")
 
-	data, err := json.Marshal(record)
+	data, err := json.Marshal(table)
 	if err != nil {
 		panic(err)
 	}
