@@ -14,6 +14,10 @@ func SaveRecordToFile(ctx *cli.Context, table *model.RecordTable) {
 
 	dbPath := filepath.Join(USER_HOME, "tt.db")
 
+	if len(table.Records) > DATA_BASE_RECORDS_LIMIT {
+		table.Records = table.Records[len(table.Records)-DATA_BASE_RECORDS_LIMIT:]
+	}
+
 	data, err := json.Marshal(table)
 	if err != nil {
 		panic(err)
