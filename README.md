@@ -6,6 +6,10 @@
 
 This is a simple CLI program for tracking time spent on activities. It offers basic functionalities to start, pause, resume, stop, and show the recorded time.
 
+## Download
+
+To download this program, visit the [GitHub repository](https://github.com/Diegiwg/tt)
+
 ## Installation
 
 To use this program, you need to have Go installed on your system. Once you have Go set up, you can install the program with the following command:

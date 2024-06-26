@@ -6,6 +6,10 @@
 
 Este é um programa de linha de comando simples para rastrear o tempo gasto em atividades. Ele oferece funcionalidades básicas para iniciar, pausar, retomar, parar e mostrar o tempo registrado.
 
+## Download
+
+Para baixar este programa, acesse o repositório [GitHub](https://github.com/Diegiwg/tt)
+
 ## Instalação
 
 Para usar este programa, você precisa ter o Go instalado no seu sistema. Uma vez que o Go esteja configurado, você pode instalar o programa com o seguinte comando:
